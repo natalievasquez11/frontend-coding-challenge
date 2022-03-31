@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.App {
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+header {
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(1, 71, 1);
+  color: rgb(255, 194, 32);
+  padding: 0 30px;
+}
+
+header p {
+  font-size: 30px;
+}
+
+.top-div {
+  margin-top: 150px;
+}
+
+
