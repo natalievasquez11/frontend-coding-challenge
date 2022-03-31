@@ -20,12 +20,24 @@ header {
   padding: 0 30px;
 }
 
-header p {
+.cart-button {
   font-size: 30px;
+  background-color: rgb(1, 71, 1);
+  color: rgb(255, 194, 32);
+  border:none;
+  cursor: grab;
 }
 
 .top-div {
   margin-top: 150px;
 }
 
+.item-added-msg {
+  padding: 20px;
+  background-color:rgb(255, 194, 32);
+  color:rgb(1, 71, 1);
+  width: 20%;
+  margin: auto;
+  border-radius: 10px;
+}
 

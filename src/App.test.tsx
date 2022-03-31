@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
+import { fetchProducts } from './client';
 
 /**
  * We should test that following requirements are met.
@@ -17,8 +19,30 @@ import App from './App';
  *
  */
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+ describe('App', () => {
+  test('products presented on app load', () => {
+    render(<App />);
+
+  });
+});
+
+describe('App', () => {
+  test('user search input filters & presents products that matching name and/or description', () => {
+    render(<App />);
+
+  });
+});
+
+describe('App', () => {
+  test('product adds to cart', () => {
+    render(<App />);
+
+  });
+});
+
+describe('App', () => {
+  test('product removes from cart', () => {
+    render(<App />);
+
+  });
 });

@@ -4,13 +4,11 @@ import './productList.css';
 
 type Props = {
   products: Product[];
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  setCart: React.Dispatch<React.SetStateAction<Product[]>>;
+  cart: Product[];
 }
 
-const ProductList = ({products}: Props) => {
-
-
-
+const ProductList = ({products, setCart, cart }: Props) => {
   return (
     <div className='product-list'>
         {products.map(prod => (
@@ -19,7 +17,7 @@ const ProductList = ({products}: Props) => {
             <span>
               <p className='item-kind'>{prod.kind}</p>
               <p className='item-name'>{prod.name}</p>
-              <button className='add-to-cart-btn'>Add to Cart</button>
+              <button type='button' className='add-to-cart-btn' onClick={() => setCart([...cart, prod])}>Add to Cart</button>
             </span>
           </div>
         ))}

@@ -6,32 +6,32 @@ import Search from './components/Search';
 import Cart from './components/Cart';
 
 const App = () => {
-  let allProducts: Product[] = [];
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  // const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchProducts().then(data => {
-      allProducts = data;
-      setProducts(allProducts);
-    })
+      setProducts(data);
+    }).catch(err => console.log(err))
   }, []);
 
-  // {products.map(p => (
-  //   console.log(p)
-  // ))}
+  const handleCartClick = () => {
+    setIsCartOpen(!isCartOpen);
+  }
 
   return (
   <div className="App">
     <header>
       <h1>Jane</h1>
-      <p>Cart</p>
+      <button className='cart-button' onClick={handleCartClick}>Cart ({cart.length})</button>
     </header>
     <div className='top-div'>
-      <Cart />
-      <Search />
+      {isCartOpen && <Cart cart={cart} setCart={setCart}/>}
+      <Search products={products} setProducts={setProducts} />
     </div>
-    <ProductList products={products} setProducts={setProducts}/>
+    <ProductList products={products} setCart={setCart} cart={cart}/>
   </div>
   );
 }
