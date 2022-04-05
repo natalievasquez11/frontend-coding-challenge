@@ -7,12 +7,13 @@ import Cart from './components/Cart';
 
 const App = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  // const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchProducts().then(data => {
+      setAllProducts(data);
       setProducts(data);
     }).catch(err => console.log(err))
   }, []);
@@ -29,9 +30,9 @@ const App = () => {
     </header>
     <div className='top-div'>
       {isCartOpen && <Cart cart={cart} setCart={setCart}/>}
-      <Search products={products} setProducts={setProducts} />
+      <Search products={products} setProducts={setProducts} allProducts={allProducts}/>
     </div>
-    <ProductList products={products} setCart={setCart} cart={cart}/>
+    <ProductList products={products} setCart={setCart} cart={cart} />
   </div>
   );
 }

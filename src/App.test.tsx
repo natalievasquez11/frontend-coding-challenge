@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { fetchProducts } from './client';
+import { act } from 'react-dom/test-utils';
 
 /**
  * We should test that following requirements are met.
@@ -19,6 +20,17 @@ import { fetchProducts } from './client';
  *
  */
 
+//  const fakeProduct = {
+//   amount: null, brand_subtype: 'brand_sub', brand: 'brand', cannabinoids: [0,1],
+//   category: null, description: 'desc', dosage: 'dosage', effects: [2, 4],
+//   flavors: ['berry', 'citrus'], image_urls: ['image_url'], ingredients: ['ing1', 'ing2'], 
+//   kind_subtype: 'kind_sub', kind: 'kind', custom_product_type: 'custom_prod_type',
+//   name: 'name', percent_cbd: 34, percent_cbda: 35, percent_thc: 76, percent_thca: 13,
+//   percent_tac: 25, product_id: 342556, product_percent_cbd: 23, 
+//   product_percent_thc: 5, review_count: 12, root_subtype: 'root_sub', 
+//   terpenes: [454,56], type: 'type'
+// };
+
  describe('App', () => {
   test('products presented on app load', () => {
     render(<App />);
@@ -34,9 +46,10 @@ describe('App', () => {
 });
 
 describe('App', () => {
-  test('product adds to cart', () => {
+  test('product adds to cart', async () => {
     render(<App />);
 
+    screen.debug();
   });
 });
 
