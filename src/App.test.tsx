@@ -1,9 +1,9 @@
-import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import fetchMock from "fetch-mock";
-import { fetchProducts } from './client';
+import { fetchProducts, Product } from './client';
+import { DefaultRequestBody, rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 
 
@@ -22,14 +22,48 @@ import { fetchProducts } from './client';
  *
  */
 
- describe('App', () => {
+const fakeProducts:Product[] = [
+  {  amount: null, brand_subtype: 'fake-brand-subtype1', brand: 'fake-brand1', cannabinoids: [], category: null,
+    description: 'skunky', dosage: '', effects: [], flavors: [], image_urls: [],
+    ingredients: [], kind_subtype: '', kind: '', custom_product_type: '',
+    name: 'fake-product-1', percent_cbd: 2, percent_cbda: 2, percent_thc: 2, percent_thca: 2,
+    percent_tac: 2, product_id: 1, product_percent_cbd: 2, product_percent_thc: 2,
+    review_count: 2, root_subtype: '', terpenes: [], type: ''
+  }, 
+  {  amount: null, brand_subtype: 'fake-brand-subtype2', brand: 'fake-brand2', cannabinoids: [], category: null,
+  description: 'skunky', dosage: '', effects: [], flavors: [], image_urls: [],
+  ingredients: [], kind_subtype: '', kind: '', custom_product_type: '',
+  name: 'fake-product-2', percent_cbd: 2, percent_cbda: 2, percent_thc: 2, percent_thca: 2,
+  percent_tac: 2, product_id: 2, product_percent_cbd: 2, product_percent_thc: 2,
+  review_count: 2, root_subtype: '', terpenes: [], type: ''
+  }, 
+  {  amount: null, brand_subtype: 'fake-brand-subtype1', brand: 'fake-brand1', cannabinoids: [], category: null,
+  description: 'skunky', dosage: '', effects: [], flavors: [], image_urls: [],
+  ingredients: [], kind_subtype: '', kind: '', custom_product_type: '',
+  name: 'fake-product-3', percent_cbd: 2, percent_cbda: 2, percent_thc: 2, percent_thca: 2,
+  percent_tac: 2, product_id: 3, product_percent_cbd: 2, product_percent_thc: 2,
+  review_count: 2, root_subtype: '', terpenes: [], type: ''
+  }
+];
 
-  it('products presented on app load', async () => { 
-    render(<App />);
-  
-    screen.debug();
-  });
+const productResponse = rest.get<DefaultRequestBody, Product[]>('../public/data/products.json', (req, res, ctx) => {
+    return res(ctx.json(fakeProducts))
 });
+
+const handlers = [productResponse]
+
+const server = setupServer(...handlers);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test('products presented on app load', async () => { 
+  render(<App />);
+  const productItem = await screen.findByTestId('product-item');
+  expect(productItem).toBeVisible();
+});
+
 
 // describe('App', () => {
 //   test('user search input filters & presents products that matching name and/or description', () => {

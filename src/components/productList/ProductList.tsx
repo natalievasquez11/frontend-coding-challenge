@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Product } from '../client';
+import { Product } from '../../client';
 import './productList.css';
 
 type Props = {

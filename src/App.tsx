@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { fetchProducts, Product } from './client';
-import ProductList from './components/ProductList';
+import ProductList from './components/productList/ProductList';
 import Search from './components/Search';
 import Cart from './components/Cart';
 
