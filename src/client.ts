@@ -32,6 +32,5 @@ export async function fetchProducts(): Promise<Product[]> {
   const url = `data/products.json`;
   const response = await fetch(url);
   const { products } = await response.json();
-  console.log('right before return')
   return products as Product[];
 }

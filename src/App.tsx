@@ -12,7 +12,9 @@ const App = () => {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log('useEffect log')
     fetchProducts().then(data => {
+      console.log('fetch log')
       setAllProducts(data);
       setProducts(data);
     }).catch(err => console.log(err))

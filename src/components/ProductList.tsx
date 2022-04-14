@@ -12,7 +12,7 @@ const ProductList = ({products, setCart, cart }: Props) => {
   return (
     <div className='product-list'>
         {products.map(prod => (
-          <div key ={prod.product_id} className='product-list-item'>
+          <div data-testid='product-item' key={prod.product_id} className='product-list-item'>
             <img src={prod.image_urls.toString()} alt='' />
             <span>
               <p className='item-kind'>{prod.kind}</p>
